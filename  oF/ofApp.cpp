@@ -56,7 +56,10 @@ void ofApp::update(){
 		serial.readBytes(receiveData, RECEIVE_DATA_SIZE_1_TIME);
 		int id = 0;
 		
-		while( (receiveData[id] < 128) && (id < RECEIVE_DATA_SIZE_1_TIME) ) id++;
+		while(id < RECEIVE_DATA_SIZE_1_TIME){
+			if(128 <= receiveData[id]) break;
+			id++;
+		}
 		
 		if(id < RECEIVE_DATA_SIZE_1_TIME - 2){
 			int Head = (int)receiveData[id];

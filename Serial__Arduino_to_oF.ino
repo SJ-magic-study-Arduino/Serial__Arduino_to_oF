@@ -25,6 +25,7 @@ void loop() {
 	Serial.write(low);
 	
 	delay(33);
+	// delay(10);
 }
 
 

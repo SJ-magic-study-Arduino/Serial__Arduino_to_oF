@@ -48,6 +48,7 @@ private:
 		WINDOW_HEIGHT	= 300,
 	};
 	enum{
+		SIZE_DATA_SET = 3,
 		RECEIVE_DATA_SIZE_1_TIME = 5,
 	};
 	

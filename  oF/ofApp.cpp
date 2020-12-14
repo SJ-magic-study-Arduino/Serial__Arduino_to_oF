@@ -44,31 +44,24 @@ void ofApp::setup(){
 /******************************
 ******************************/
 void ofApp::update(){
-	if(RECEIVE_DATA_SIZE_1_TIME <= serial.available()){
-		/********************
-		********************/
-		while(RECEIVE_DATA_SIZE_1_TIME < serial.available()){
-			serial.readByte(); // 読み捨て
-		}
-		
-		/********************
-		********************/
-		serial.readBytes(receiveData, RECEIVE_DATA_SIZE_1_TIME);
-		int id = 0;
-		
-		while(id < RECEIVE_DATA_SIZE_1_TIME){
-			if(128 <= receiveData[id]) break;
-			id++;
-		}
-		
-		if(id < RECEIVE_DATA_SIZE_1_TIME - 2){
-			int Head = (int)receiveData[id];
-			int High = (int)receiveData[id + 1];
-			int Low  = (int)receiveData[id + 2];
+	// int Loops = 0;
+	
+	while(SIZE_DATA_SET <= serial.available()){
+		int temp = serial.readByte();
+		if(128 <= temp){ // is Header?
+			// Loops++;
+			
+			int Head = temp;
+			int High = serial.readByte();
+			int Low  = serial.readByte();
 			
 			ReceivedData = ((Head - 128) << 14) + (High << 7) + (Low);
 		}
 	}
+	/*
+	printf("Loops : %d\n", Loops);
+	fflush(stdout);
+	*/
 }
 
 /******************************
